@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 
+import { IComment } from '../../store';
+
 const styles = require('./AddComment.css').default;
 
 interface Props {
   onSubmit: (message: string, ...args: any[]) => void;
-  commentId?: number
+  comment?: IComment
 }
 
-function AddComment({ onSubmit, commentId }: Props) {
+function AddComment({ onSubmit, comment }: Props) {
   const [value, setValue] = useState('');
 
   return (
@@ -25,9 +27,9 @@ function AddComment({ onSubmit, commentId }: Props) {
           className={styles.submitButton}
           disabled={!value}
           onClick={() => {
-            onSubmit(value, commentId);
+            onSubmit(value, comment);
             setValue('');
-          }}>{commentId ? 'Reply': 'Comment'}</button>
+          }}>{comment ? 'Reply': 'Comment'}</button>
       </div>
     </div>
   );

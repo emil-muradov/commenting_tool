@@ -14,14 +14,14 @@ export const AVATAR_SMALL_SIZE = 18;
 interface Props {
   avatarSize?: number;
   comment: IComment
-  onReply: (message: string, commentId: number) => void
+  onReply: (message: string, comment: IComment) => void
 }
 
 export function Comment({ comment, onReply, avatarSize = AVATAR_DEFAULT_SIZE }: Props) {
   const [showInput, setShowInput] = useState(false);
 
-  const reply = useCallback((message: string, commentId: number) => {
-    onReply(message, commentId);
+  const reply = useCallback((message: string, comment: IComment) => {
+    onReply(message, comment);
     setShowInput(false);
   }, []);
 
@@ -42,7 +42,7 @@ export function Comment({ comment, onReply, avatarSize = AVATAR_DEFAULT_SIZE }: 
             <span>{'Reply'}</span>
           </div>
         </div>
-        {showInput ? <AddCommentWindow onSubmit={reply} commentId={comment.id} /> : null}
+        {showInput ? <AddCommentWindow onSubmit={reply} comment={comment} /> : null}
         {comment.replies.map((x, i) => <Comment key={i} comment={x} onReply={onReply} avatarSize={AVATAR_SMALL_SIZE} />)}
       </div>
     </div>

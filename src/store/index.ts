@@ -23,27 +23,14 @@ export const Store = types
       });
     }
 
-    function _getParentComment(commentId: number, list: Instance<typeof Comment>[]): Instance<typeof Comment> {
-      let parent = list.find((x => x.id === commentId));
-      if (!parent) {
-        const replies = list.map(x => x.replies);
-        for (let i = 0; i < replies.length; i++) {
-          parent = _getParentComment(commentId, replies[i]);
-          if (parent) break;
-        }
-      }
-      return parent!;
-    }
-
     function submit(message: string) {
       const comment = _createComment(message);
       self.comments.push(comment);
     }
 
-    function reply(message: string, commentId: number) {
-      const comment = _createComment(message, commentId);
-      const parent = _getParentComment(commentId, self.comments);
-      parent!.replies.push(comment);
+    function reply(message: string, parentComment: Instance<typeof Comment>) {
+      const comment = _createComment(message, parentComment.id);
+      parentComment.replies.push(comment);
     }
 
     return {
