@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { observer } from 'mobx-react-lite';
 
 import { timePassed } from '../../utils/timePassed';
@@ -20,10 +20,10 @@ interface Props {
 export function Comment({ comment, onReply, avatarSize = AVATAR_DEFAULT_SIZE }: Props) {
   const [showInput, setShowInput] = useState(false);
 
-  function reply(message: string, commentId: number) {
+  const reply = useCallback((message: string, commentId: number) => {
     onReply(message, commentId);
     setShowInput(false);
-  }
+  }, []);
 
   return (
     <div className={styles.container}>

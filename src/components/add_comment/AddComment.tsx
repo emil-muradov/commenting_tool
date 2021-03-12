@@ -24,7 +24,10 @@ function AddComment({ onSubmit, commentId }: Props) {
         <button
           className={styles.submitButton}
           disabled={!value}
-          onClick={() => onSubmit(value, commentId)}>{commentId ? 'Reply': 'Comment'}</button>
+          onClick={() => {
+            onSubmit(value, commentId);
+            setValue('');
+          }}>{commentId ? 'Reply': 'Comment'}</button>
       </div>
     </div>
   );
