@@ -1,4 +1,5 @@
 import { Instance, types } from 'mobx-state-tree';
+
 import { Comment, User } from './models';
 
 export const Store = types
@@ -48,8 +49,8 @@ export const Store = types
     return {
       submit,
       reply
-    }
-  })
+    };
+  });
 
 export type IComment = Instance<typeof Comment>;
 export type IStore = Instance<typeof Store>;
