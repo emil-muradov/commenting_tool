@@ -20,10 +20,10 @@ interface Props {
 export function Comment({ comment, onReply, avatarSize = AVATAR_DEFAULT_SIZE }: Props) {
   const [showInput, setShowInput] = useState(false);
 
-  const reply = useCallback((message: string, comment: IComment) => {
-    onReply(message, comment);
-    setShowInput(false);
-  }, []);
+  const reply = useCallback((message: string) => {
+      onReply(message, comment);
+      setShowInput(false);
+  }, [comment]);
 
   return (
     <div className={styles.container}>
@@ -42,7 +42,7 @@ export function Comment({ comment, onReply, avatarSize = AVATAR_DEFAULT_SIZE }: 
             <span>{'Reply'}</span>
           </div>
         </div>
-        {showInput ? <AddCommentWindow onSubmit={reply} comment={comment} /> : null}
+        {showInput ? <AddCommentWindow onSubmit={reply} mode={'Reply'} /> : null}
         {comment.replies.map((x, i) => <Comment key={i} comment={x} onReply={onReply} avatarSize={AVATAR_SMALL_SIZE} />)}
       </div>
     </div>
