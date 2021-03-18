@@ -12,7 +12,7 @@ interface Props {
   store: IStore
 }
 
-export function App({ store }: Props) {
+const App: React.FC<Props> = ({ store }) => {
   return (
     <div className={styles.app}>
       <div>
