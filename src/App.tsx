@@ -19,7 +19,7 @@ export function App({ store }: Props) {
         <AddCommentWindow onSubmit={store.submit} />
         <div className={styles.commentList}>
           {
-            store.comments.map((x, i) => <Comment key={i} comment={x} onReply={store.reply} />)
+            store.comments.map(x => <Comment key={x.id} comment={x} onReply={store.reply} />)
           }
         </div>
       </div>

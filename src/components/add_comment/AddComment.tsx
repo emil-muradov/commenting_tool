@@ -8,7 +8,7 @@ interface Props {
   mode?: 'Comment' | 'Reply';
 }
 
-function AddComment({ onSubmit, mode = 'Comment' }: Props) {
+const AddComment: React.FC<Props> = ({ onSubmit, mode = 'Comment' }) => {
   const [value, setValue] = useState('');
 
   return (

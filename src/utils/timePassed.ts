@@ -1,6 +1,6 @@
 import { differenceInDays, differenceInHours, differenceInMinutes } from 'date-fns';
 
-export function timePassed(dateString: string) {
+export function timePassed(dateString: string): string {
     const parsed = new Date(dateString);
     const now = new Date();
     const days = differenceInDays(now, parsed);

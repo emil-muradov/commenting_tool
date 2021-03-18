@@ -17,7 +17,7 @@ interface Props {
   onReply: (message: string, comment: IComment) => void
 }
 
-export function Comment({ comment, onReply, avatarSize = AVATAR_DEFAULT_SIZE }: Props) {
+const Comment: React.FC<Props> = ({ comment, onReply, avatarSize = AVATAR_DEFAULT_SIZE }) => {
   const [showInput, setShowInput] = useState(false);
 
   const reply = useCallback((message: string) => {
@@ -36,14 +36,14 @@ export function Comment({ comment, onReply, avatarSize = AVATAR_DEFAULT_SIZE }: 
           <span className={styles.timePassed}>{timePassed(comment.createdAt)}</span>
         </div>
         <div className={styles.message}>{comment.message}</div>
-        <div className={styles.actions} onClick={() => setShowInput(!showInput)}>
-          <div className={styles.action}>
+        <div className={styles.actions}>
+          <div className={styles.action} onClick={() => setShowInput(!showInput)}>
             <i className={styles.commentIcon} />
             <span>{'Reply'}</span>
           </div>
         </div>
-        {showInput ? <AddCommentWindow onSubmit={reply} mode={'Reply'} /> : null}
-        {comment.replies.map((x, i) => <Comment key={i} comment={x} onReply={onReply} avatarSize={AVATAR_SMALL_SIZE} />)}
+        {showInput && <AddCommentWindow onSubmit={reply} mode={'Reply'} />}
+        {comment.replies.map(x => <Comment key={x.id} comment={x} onReply={onReply} avatarSize={AVATAR_SMALL_SIZE} />)}
       </div>
     </div>
   );
